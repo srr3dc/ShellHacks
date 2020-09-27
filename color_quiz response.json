@@ -1,0 +1,22 @@
+exports.handler = function(context, event, callback) {
+  //Memory from answered question
+	let memory = JSON.parse(event.Memory);
+  let respObj = {};
+  //get answer from Memory
+  let fav = memory.twilio.collected_data.colors.answers.fav_color.answer;
+  let sky = memory.twilio.collected_data.colors.answers.sky.answer;
+  let around = memory.twilio.collected_data.colors.answers.around.answer;
+  let happy = memory.twilio.collected_data.colors.answers.happy.answer;
+  let complement = memory.twilio.collected_data.colors.answers.complement.answer;
+  let rainbow = memory.twilio.collected_data.colors.answers.rainbow.answer;
+  
+  var msg = `That's the end of the quiz. I hope you enjoyed it.`
+  respObj = {"actions": [
+      {"say": msg}, 
+      {"redirect": "task://anything_else"}
+  ]};
+  // This callback is what is returned in response to this function being invoked.
+  // It's really important! E.g. you might respond with TWiML here for a voice or SMS response.
+  // Or you might return JSON data to a studio flow. Don't forget it!
+  callback(null, respObj);
+};
